@@ -30,8 +30,7 @@ const Otp = () => {
                 }
             )
             console.log(response.data)
-        }
-        catch (error) {
+        } catch (error) {
             console.log("Error sending OTP: ", error)
         }
     }

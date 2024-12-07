@@ -32,6 +32,27 @@ const ToogleForm = () => {
       console.log('Login request: ' + response.data);
 
       if (response.status === 200) {
+        try {
+          const jwtResponse = await axios.post(
+            'http://localhost:8084/api/auth/login',
+            {
+              userId: id,
+              password
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+
+          if (jwtResponse.status === 200) {
+            localStorage.setItem("jwtToken", jwtResponse.data.jwtToken);
+          }
+        } catch (error) {
+          console.log("JWT Error: " + error);
+        }
+          
         navigate(`/${role.toLowerCase()}_login`);
       }
     } catch (error) {
