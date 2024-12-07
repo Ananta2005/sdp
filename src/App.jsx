@@ -12,6 +12,7 @@ import Home from './Pages/Home/Home';
 import Reg_Courses from './Pages/Reg_Courses/Reg_Courses';
 import Upload from './Pages/Upload/Upload';
 import Otp from './Pages/Otp/Otp'
+import Exam from './Pages/Exam/Exam'
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
             <Route path='/courses' element={<Reg_Courses />} />
             <Route path= '/upload' element={<Upload role='Teacher'/>} />
             <Route path='/otp' element={<Otp />} />
+            <Route path='/exam' element={<Exam />} />
           </Routes>
         </div>
       </Router>
