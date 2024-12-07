@@ -1,0 +1,68 @@
+.sidebar_container{
+    width: 250px;
+    height: 90vh;
+    background-color: rgb(241, 146, 146);    /*make it white*/
+    color: black;    /*text color*/
+    position: fixed;
+    top:85px;
+    left: 0.7px;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.sidebar_container.closed{
+    width: 80px;
+}
+
+.sidebar_header{
+    display: flex;
+    align-items: center;
+    background-color: aquamarine;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.sidebar_toggle_btn{
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.nav_menu ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav_menu ul li{
+    padding: 15px 20px;
+}
+
+.nav_menu ul li a{
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav_menu ul li a:hover{
+    background-color: rgb(41, 41, 77);
+}
+
+.sidebar_down {
+    background-color: aquamarine;
+    padding: 10px;
+    text-align: center;
+}
+
+.logout_btn {
+    width: 100%;
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
