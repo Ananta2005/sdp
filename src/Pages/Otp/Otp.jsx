@@ -21,7 +21,7 @@ const Otp = () => {
         console.log("HERE");
         try {
             const response = await axios.post(
-                'http://localhost:8083/api/emails/email-verification/send',
+                "https://email-services.up.railway.app/api/emails/email-verification/send",
                 { userEmail: userEmail },
                 {
                     headers: {
@@ -71,7 +71,7 @@ const Otp = () => {
         console.log("Sending: " + verificationData.token);
 
         try {
-            const evresponse = await axios.post(`http://localhost:8083/api/emails/email-verification/verify`, verificationData);
+            const evresponse = await axios.post("https://email-services.up.railway.app/api/emails/email-verification/verify", verificationData);
             if (evresponse.status === 200) {
                 alert("Successfully verified email!");
                 navigate("/login");
