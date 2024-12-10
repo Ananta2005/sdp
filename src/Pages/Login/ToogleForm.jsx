@@ -28,13 +28,19 @@ const ToogleForm = () => {
 
     try {
       var port = role === "TEACHER" ? 8082 : 8081;
-      const response = await axios.post(`http://localhost:${port}/api/${role.toLowerCase()}s/login`, loginData);
+      var r = null;
+      if (role === "TEACHER") {
+        r = await axios.post("https://teacher-service.up.railway.app/api/teachers/login", loginData);
+      } else {
+        r = await axios.post("https://student-service.up.railway.app/api/students/add", loginData);
+      }
+      const response = r;
       console.log('Login request: ' + response.data);
 
       if (response.status === 200) {
         try {
           const jwtResponse = await axios.post(
-            'http://localhost:8084/api/auth/login',
+            'https://jwt-service.up.railway.app/api/auth/login',
             {
               userId: id,
               password
@@ -85,7 +91,13 @@ const ToogleForm = () => {
 
     try {
       var port = role === "TEACHER" ? 8082 : 8081;
-      const response = await axios.post(`http://localhost:${port}/api/${role.toLowerCase()}s/add`, signupData);
+      var r = null;
+      if (rolw === "TEACHER") {
+        r = await axios.post("https://teacher-service.up.railway.app/api/teachers/add", signupData);
+      } else {
+        r = await axios.post("https://student-service.up.railway.app/api/students/add", signupData);
+      }
+      const response = r;
       if (response.status === 201) {
         var oi = 0;
         if (port === 8082) {
@@ -98,7 +110,7 @@ const ToogleForm = () => {
 
         try {
           const evresponse = await axios.post(
-            'http://localhost:8083/api/emails/email-verification/send',
+            "https://email-services.up.railway.app/api/emails/email-verification/send",
             { userEmail: email },
             {
               headers: {
