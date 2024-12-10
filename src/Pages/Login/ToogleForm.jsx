@@ -27,12 +27,20 @@ const ToogleForm = () => {
     };
 
     try {
+<<<<<<< HEAD
       const port = role === "TEACHER" ? 8082 : 8081;
+=======
+      var port = role === "TEACHER" ? 8082 : 8081;
+>>>>>>> b692f8cb2fa422e74fc436514332500ff489848a
       var r = null;
       if (role === "TEACHER") {
         r = await axios.post("https://teacher-service.up.railway.app/api/teachers/login", loginData);
       } else {
+<<<<<<< HEAD
         r = await axios.post("https://student-service.up.railway.app/api/students/login", loginData);
+=======
+        r = await axios.post("https://student-service.up.railway.app/api/students/add", loginData);
+>>>>>>> b692f8cb2fa422e74fc436514332500ff489848a
       }
       const response = r;
       console.log('Login request: ' + response.data);
@@ -40,7 +48,11 @@ const ToogleForm = () => {
       if (response.status === 200) {
         try {
           const jwtResponse = await axios.post(
+<<<<<<< HEAD
             "https://jwt-service.up.railway.app/api/auth/login",
+=======
+            'https://jwt-service.up.railway.app/api/auth/login',
+>>>>>>> b692f8cb2fa422e74fc436514332500ff489848a
             {
               userId: id,
               password
