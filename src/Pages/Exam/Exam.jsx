@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Radar } from "react-chartjs-2";
 import './Exam.css'
 import {
@@ -11,6 +11,9 @@ import {
   Legend,
 } from "chart.js";
 import Sidebar from "../../Components/Sidebar/sidebar";
+import { useAuth } from "../../context/AuthContext";
+import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
   RadialLinearScale,
@@ -22,7 +25,25 @@ ChartJS.register(
 );
 
 const Exam = () => {
-    
+  const { token, logout } = useAuth();
+  const [data, setData] = useState(null);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (token) {
+      api.get("https://jwt-service.up.railway.app/test")
+        .then(response => {
+          setData(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching data', error);
+          if (error.response && error.response.status === 401) {
+            logout();
+          }
+        });
+    }
+  }, [token, logout]);
+
   const [studentData, setStudentData] = useState({
     name: "",
     almMarks: "",
@@ -46,7 +67,7 @@ const Exam = () => {
       return;
     }
 
-  
+
     setChartData({
       labels: ["ALM Marks", "Assignment Marks", "Course Marks"],
       datasets: [
@@ -56,7 +77,7 @@ const Exam = () => {
             parseFloat(almMarks),
             parseFloat(assignmentMarks),
             parseFloat(courseMarks),
-        ],
+          ],
           backgroundColor: "rgba(75, 192, 192, 0.2)",
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 2,
@@ -68,10 +89,17 @@ const Exam = () => {
     setStudentData({ name: "", almMarks: "", assignmentMarks: "", courseMarks: "" });
   };
 
+  if (!token) {
+    alert("Authentication error");
+    setTimeout(() => {
+      navigate('/login');
+    });
+  }
+
   return (
-    
+
     <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-        <Sidebar />
+      <Sidebar />
       <h2>Student Performance Radar Chart</h2>
       <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
         <div style={{ marginBottom: "10px" }}>

@@ -13,6 +13,8 @@ import Reg_Courses from './Pages/Reg_Courses/Reg_Courses';
 import Upload from './Pages/Upload/Upload';
 import Otp from './Pages/Otp/Otp'
 import Exam from './Pages/Exam/Exam'
+import { AuthProvider } from './context/AuthContext';
+import Logout from './Pages/Logout'
 
 
 const App = () => {
@@ -20,7 +22,7 @@ const App = () => {
   
 
   return (
-    <>
+    <AuthProvider>
       <Router>
         <div className={`container ${theme}`}>
           <Navbar theme={theme} setTheme={setTheme} />
@@ -29,19 +31,20 @@ const App = () => {
 
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/profile' element={<Profile />} />
             <Route path="/login" element={<ToogleForm />} />
+            <Route path='/otp' element={<Otp />} />
+            <Route path='/profile' element={<Profile />} />
             <Route path="/student_login" element={<StudentLogin  role='Student'/>} />
             <Route path="/teacher_login" element={<TeacherLogin role='Teacher'/>} />
             <Route path='/courses' element={<Reg_Courses />} />
             <Route path= '/upload' element={<Upload role='Teacher'/>} />
-            <Route path='/otp' element={<Otp />} />
             <Route path='/exam' element={<Exam />} />
+            <Route path='/logout' element={<Logout />} />
           </Routes>
         </div>
       </Router>
  
-    </>
+    </AuthProvider>
    
   );
 };

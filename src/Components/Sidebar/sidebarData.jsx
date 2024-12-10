@@ -37,7 +37,7 @@ const sidebarData = [
   {
     title: "Logout",
     icon: <LogoutOutlined />,
-    path: "/"
+    path: "/logout"
   }
   
 
